@@ -1,21 +1,49 @@
-import java.util.Arrays;
+package org.example;
 import java.util.Scanner;
+
 public class casoAdyacentes {
     public static void main(String[] args) {
         int[] array = entradaArray(entradaLargoArray());
+        System.out.println("El mayor resultado de la multiplicación entre 2 numeros adyacentes es de: ");
         System.out.print(productoAdyacentes(array));
     }
     public static int entradaLargoArray() {
-        Scanner entrada = new Scanner(System.in);
-        System.out.print("Ingrese el largo del array: ");
-        return entrada.nextInt();
+        boolean esNumero;
+        int largo=0;
+        Scanner sc = new Scanner(System.in);
+        do{
+            try{
+                esNumero=true;
+                System.out.print("Ingrese el largo del array: ");
+                largo = sc.nextInt();
+            } catch (Exception e){
+                sc.next();
+                System.out.println("Tienen que ser numeros enteros, ingreselos nuevamente");
+                esNumero=false;
+            }
+        } while(!esNumero);
+        while (largo<2){
+            System.out.println("No es valido un largo de "+largo+", ingrese un largo mayor que 1:");
+            largo=sc.nextInt();
+        }
+        return largo;
     }
     public static int[] entradaArray(int largo) {
-        Scanner entrada = new Scanner(System.in);
+        boolean esNumero;
+        Scanner sc = new Scanner(System.in);
         int[] arreglo = new int[largo];
         for (int i = 0; i < arreglo.length; i++) {
-            System.out.print("Ingrese el valor de la posición " + i + ": ");
-            arreglo[i] = entrada.nextInt();
+            do{
+                try{
+                    esNumero=true;
+                    System.out.print("Ingrese el valor de la posición " + (i+1) + ": ");
+                    arreglo[i] = sc.nextInt();
+                } catch (Exception e){
+                    sc.next();
+                    System.out.println("Tienen que ser numeros enteros, ingreselos nuevamente");
+                    esNumero=false;
+                }
+            } while(!esNumero);
         }
         return arreglo;
     }
